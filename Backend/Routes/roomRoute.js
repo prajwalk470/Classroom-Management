@@ -2,9 +2,10 @@ import express  from "express";
 import Room from '../models/room.js'
 const router = express.Router();
 // create a route for room
+
 router.post('/', async (req, res) => {
     try {
-        if (!req.body.roomnumber || !req.body.branch){
+        if (!req.body.roomnumber || !req.body.branch || !req.body.floor || !req.body.block){
             return res.status(400).send({
                 message: 'Send all fields',
             });
@@ -12,7 +13,9 @@ router.post('/', async (req, res) => {
 
         const newRoom = {
             roomnumber: req.body.roomnumber,
-            branch: req.body.branch
+            branch: req.body.branch,
+            floor: req.body.floor,
+            block:req.body.block
         };
 
         const room = await Room.create(newRoom);
@@ -54,8 +57,7 @@ router.get('/:id', async(req, res)=>{
 });
 router.put('/:id', async(req, res)=>{
     try{
-
-        if (!req.body.roomnumber || !req.body.branch){
+        if (!req.body.roomnumber || !req.body.block || !req.body.floor || !req.body.branch){
             return res.status(400).send({
                 message: 'Send all fields',
             });
