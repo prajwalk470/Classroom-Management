@@ -6,7 +6,7 @@ import userData from "./models/signin.js";
 import cors from "cors";
 import roomRoute from './Routes/roomRoute.js'
 import signRoute from './Routes/signRoute.js';
-import loginRoute from './Routes/loginRoute.js';
+// import loginRoute from './Routes/loginRoute.js';
 
 const app= express();
 

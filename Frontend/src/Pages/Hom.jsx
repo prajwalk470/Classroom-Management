@@ -5,6 +5,7 @@ import {Link } from 'react-router-dom';
 import { AiOutlineEdit} from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import Sidebar from '../Components/Sdebar.jsx';
 
 function Home() {
   const [rooms, setRooms] =useState([]);
@@ -22,7 +23,10 @@ function Home() {
     });
   },[]);
   return (
-    <div className='p-4'>
+
+    <div className="mx-auto mt-8 flex">
+      <Sidebar/>
+      <div className=' mx-auto mt-8p-4'>
       <div className='flex justify-between items-center'>
         <h1 className='text-3xl my-8'>List of Rooms</h1>
         <Link to='/rooms/create'>
@@ -32,51 +36,53 @@ function Home() {
       {loading ? (
         <Spinner/>
       ) : (
-        <table className='w-full border-separate border-spacing-2'>
-          <thead>
+        
+        <table className="w-full border-separate border-spacing-2 border-2 border-gray-300 rounded-lg p-4">
+        <thead>
           <tr>
-            <th className='border border-slate-600 rounded-md'>Room No.</th>
-            <th className='border border-slate-600 rounded-md'>Block</th>
-            <th className='border border-slate-600 rounded-md'>Floor</th>
-            <th className='border border-slate-600 rounded-md'>Branch</th>
-            <th className='border border-slate-600 rounded-md'>Operations</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Room No.</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Block</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Floor</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Branch</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Operations</th>
           </tr>
-          </thead>
-          <tbody>
-             {rooms.map((room)=>(
-              <tr key={room._id} className='h-8'>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {room.roomnumber}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {room.block}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {room.floor}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {room.branch}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  <div className='flex justify-center gap-x-4'>
+        </thead>
+        <tbody>
+          {rooms.map((room) => (
+            <tr key={room._id} className="h-12">
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center">
+                {room.roomnumber}
+              </td>
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center">
+                {room.block}
+              </td>
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center">
+                {room.floor}
+              </td>
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center ">
+                {room.branch}
+              </td>
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center">
+                <div className="flex justify-center gap-x-4 p-3">
                   <Link to={`/rooms/details/${room._id}`}>
-                  <BsInfoCircle className='text-2xl text-green-800'/>
+                    <BsInfoCircle className="text-2xl text-green-800" />
                   </Link>
                   <Link to={`/rooms/edit/${room._id}`}>
-                    <AiOutlineEdit className='text-2xl text-yellow-600'/>
+                    <AiOutlineEdit className="text-2xl text-yellow-600" />
                   </Link>
                   <Link to={`/rooms/delete/${room._id}`}>
-                  <MdOutlineDelete className='text-2xl text-red-600'/>
+                    <MdOutlineDelete className="text-2xl text-red-600" />
                   </Link>
-                  </div>
-                </td>
-              </tr>
-             ))}
-          </tbody>
-        </table>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      
       )}
     </div>
+  </div>
   )
 }
-
 export default Home

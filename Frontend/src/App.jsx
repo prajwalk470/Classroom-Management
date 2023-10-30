@@ -8,12 +8,14 @@ import Home from './Pages/Hom';
 import SignUp from './Auth/signUp';
 import Login from './Auth/login';
 import LandPage from './Pages/LandPage';
+import Classrooms from './Pages/Classrooms';
 
 const App = () => {
   return (
     <Routes>
       <Route path='/' element={<LandPage/>} />
       <Route path='/login/rooms' element={<Home/>} />
+      <Route path='/login/rooms/classrooms' element={<Classrooms/>} />
       <Route path='/register' element={<SignUp/>} />
       <Route path='/login' element={<Login/>} />
       <Route path='/rooms/create' element={<CreateRoom/>} />
