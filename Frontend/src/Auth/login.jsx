@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
-import SignUp from './signUp';
+// import SignUp from './signUp';
 const Login = () => {
   const [usn, setUsn] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +11,7 @@ const Login = () => {
     axios.post('http://localhost:5555/login',{usn, password})
     .then(result => {console.log(result)
       if(result.data === "Success"){
-        navigate('/login/rooms')
+        navigate('/rooms')
       }
       else{
         alert("Incorrect password . Pls try agian..")

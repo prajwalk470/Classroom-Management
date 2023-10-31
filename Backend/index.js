@@ -6,7 +6,6 @@ import userData from "./models/signin.js";
 import cors from "cors";
 import roomRoute from './Routes/roomRoute.js'
 import signRoute from './Routes/signRoute.js';
-// import loginRoute from './Routes/loginRoute.js';
 
 const app= express();
 
@@ -30,6 +29,7 @@ app.get('/',(req,res)=>{
 app.use('/rooms', roomRoute);
 app.use('/register', signRoute);
 // app.use('/login', loginRoute);
+
 app.post('/login', (req,res)=>{
     const {usn, password}= req.body;
     userData.findOne({usn:usn})

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import BackButton from '../Components/BackButton';
-import Spinner from '../Components/Spinner';
+import BackButton from '../../Components/BackButton';
+import Spinner from '../../Components/Spinner';
 
 const ShowRoom = () => {
   const [room , setRoom]= useState([]);

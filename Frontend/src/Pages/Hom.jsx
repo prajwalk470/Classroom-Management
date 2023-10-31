@@ -6,6 +6,7 @@ import { AiOutlineEdit} from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import Sidebar from '../Components/Sdebar.jsx';
+import { FaChalkboard } from 'react-icons/fa';
 
 function Home() {
   const [rooms, setRooms] =useState([]);
@@ -27,8 +28,8 @@ function Home() {
     <div className="mx-auto mt-8 flex">
       <Sidebar/>
       <div className=' mx-auto mt-8p-4'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>List of Rooms</h1>
+      <div className='flex justify-between items-center px-5'>
+        <h1 className='text-3xl my-8 flex flex-row justify-center items-center'><FaChalkboard size={25} color="#007BFF" /><div className='px-3'>Class-Rooms</div></h1>
         <Link to='/rooms/create'>
           <MdOutlineAddBox className='text-sky-800 text-4xl'/>
         </Link>
