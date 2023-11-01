@@ -11,12 +11,12 @@ const Cse3 = () => {
         <Link to="/rooms/cse/3/A" className="bg-green-500 text-white py-2 px-4 mx-2 rounded-lg">
           Section-A
         </Link>
-        <Link to="/cse/B" className="bg-blue-500 text-white py-2 px-4 mx-2 rounded-lg">
+        <Link to="/rooms/cse/3/B" className="bg-blue-500 text-white py-2 px-4 mx-2 rounded-lg">
           Section-B
         </Link>
       </div>
       <div className="flex justify-center mt-4">
-        <Link to="/cse/C" className="bg-blue-500 text-white py-2 px-4 mx-2 rounded-lg">
+        <Link to="/rooms/cse/3/C" className="bg-blue-500 text-white py-2 px-4 mx-2 rounded-lg">
           Section-C
         </Link>
         <Link to="/cse/D" className="bg-green-500 text-white py-2 px-4 mx-2 rounded-lg">

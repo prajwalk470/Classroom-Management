@@ -23,8 +23,8 @@ const App = () => {
     <Route path='rooms' element={<Home />} /> 
     <Route path='rooms/cse/3' element={<Cse3 />} />
     <Route path='rooms/cse/3/A' element={<CSa />} />
-    <Route path='rooms/classrooms/cse/3/B' element={<CSb />} />
-    <Route path='rooms/classrooms/cse/3/C' element={<CSc />} />
+    <Route path='rooms/cse/3/B' element={<CSb />} />
+    <Route path='rooms/cse/3/C' element={<CSc />} />
     <Route path='rooms/classrooms/cse/3/D' element={<CSd />} />
     <Route path='rooms/create' element={<CreateRoom />} />
     <Route path='rooms/details/:id' element={<ShowRoom />} />

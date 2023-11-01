@@ -34,7 +34,7 @@ const LandPage = () => {
           </div>
           <div className="p-4 border rounded-lg">
             <h3 className="text-xl font-semibold">Free Classrooms Tracker</h3>
-            <p className='py-3'><li>There are many classrooms in our college. So if a student want a empty classroom for any purpose he can login to the app and check the availaibility of classroom nearby..</li></p>
+            <p className='py-3'><li>There are many classrooms in our college. So if a student want an empty classroom for any purpose he can login to the app and check the availaibility of classroom nearby..</li></p>
           </div>
           <div className="p-4 border rounded-lg ">
             <h3 className="text-xl font-semibold">Feature 3</h3>
