@@ -5,6 +5,7 @@ import {PORT, mongoDBURL} from "./config.js";
 import userData from "./models/signin.js";
 import cors from "cors";
 import roomRoute from './Routes/roomRoute.js'
+import table from './Routes/ttRoute.js'
 import signRoute from './Routes/signRoute.js';
 
 const app= express();
@@ -27,6 +28,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use('/rooms', roomRoute);
+app.use('/schedule',table);
 app.use('/register', signRoute);
 // app.use('/login', loginRoute);
 
