@@ -1,35 +1,32 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
-import axios from 'axios';
-// import SignUp from './signUp';
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+
+const Login = ({ setIsAuthenticated }) => {
   const [usn, setUsn] = useState('');
   const [password, setPassword] = useState('');
-  const navigate= useNavigate();
-  const handleLogin = (e)=>{
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5555/login',{usn, password})
-    .then(result => {console.log(result)
-      if(result.data === "Success"){
-        navigate('/rooms')
-      }
-      else{
-        alert("Incorrect password . Pls try agian..")
-      }
-    })
-    .catch(err=> console.log(err)); 
+    // Check if username and password match the fixed user credentials
+    if (usn === 'admin' && password === 'admin123') {
+      // If match, set isAuthenticated to true and navigate to the secured page
+      setIsAuthenticated(true);
+      navigate('/ttcreate');
+    } else {
+      // If no match, show an alert
+      alert('Incorrect credentials. Please try again.');
+    }
   };
+
   return (
-    
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white p-8 rounded shadow-lg w-96">
-        <h2 className="text-2xl font-semibold mb-4">
-          Login
-        </h2>
+        <h2 className="text-2xl font-semibold mb-4">Login</h2>
         <form>
           <div className="mb-4">
             <label htmlFor="usn" className="block text-sm font-medium text-gray-700">
-              USN
+              Name
             </label>
             <input
               type="text"
@@ -65,13 +62,9 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account? <Link to="/register" className="text-blue-500 hover:underline focus:outline-none">Sign Up</Link>
-        </p>
       </div>
     </div>
   );
 };
 
 export default Login;
-

@@ -25,7 +25,7 @@ function Home() {
   },[]);
   return (
 
-    <div className="mx-auto mt-8 flex">
+    <div className="mx-auto  flex">
       <Sidebar/>
       <div className=' mx-auto mt-8p-4'>
       <div className='flex justify-between items-center px-5'>
@@ -45,7 +45,8 @@ function Home() {
             <th className="w-1/6 py-3 border border-slate-600 rounded-md">Block</th>
             <th className="w-1/6 py-3 border border-slate-600 rounded-md">Floor</th>
             <th className="w-1/6 py-3 border border-slate-600 rounded-md">Branch</th>
-            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Operations</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Year & Sem</th>
+            <th className="w-1/6 py-3 border border-slate-600 rounded-md">Get TimeTable</th>
           </tr>
         </thead>
         <tbody>
@@ -63,17 +64,20 @@ function Home() {
               <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center ">
                 {room.branch}
               </td>
+              <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center ">
+                {room.year_sem}
+              </td>
               <td className="w-1/6 py-3 border border-slate-700 rounded-md text-center">
                 <div className="flex justify-center gap-x-4 p-3">
-                  <Link to={`/rooms/details/${room._id}`}>
+                  <Link to={`/rooms/cse/3/A`}>
                     <BsInfoCircle className="text-2xl text-green-800" />
                   </Link>
-                  <Link to={`/rooms/edit/${room._id}`}>
+                  {/* <Link to={`/rooms/edit/${room._id}`}>
                     <AiOutlineEdit className="text-2xl text-yellow-600" />
                   </Link>
                   <Link to={`/rooms/delete/${room._id}`}>
                     <MdOutlineDelete className="text-2xl text-red-600" />
-                  </Link>
+                  </Link> */}
                 </div>
               </td>
             </tr>

@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// ttexp.js
+import mongoose from 'mongoose';
 
 const timetableSchema = new mongoose.Schema({
   Monday: [
@@ -43,6 +44,6 @@ const timetableSchema = new mongoose.Schema({
   ],
 });
 
-const Table = mongoose.model('Timetable', timetableSchema);
+const Tablexp = mongoose.model('Timetable', timetableSchema);
 
-export default Table;
+export default Tablexp;

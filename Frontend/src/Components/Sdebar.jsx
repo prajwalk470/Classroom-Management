@@ -1,97 +1,74 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
+// Sidebar.js
+import { Link } from "react-router-dom";
+import { React, useState } from "react";
 
-const Sidebar = () => {
-  const [isOpen, setisOpen] = useState(false);
-  const [under, setUnder] = useState(false);
-  const [another, setAnother] = useState(false);
-  const [ise, setIse] =useState(false);
+const Sidebar = ({ fixed }) => {
+  const [open, setOpen] = useState(true);
+  const Menus = [
+    { title: "Home", src: "Chart_fill", path: "/home" },
+    { title: "Users", src: "User", gap: true },
+    { title: "TimeTable ", src: "Calendar", path: "/ttshow" },
+    { title: "Admin Login", src: "Setting", path: "/login" },
+  ];
 
   return (
-    <>
-      {!isOpen ? (
-        <button
-          className="fixed z-30 flex items-center cursor-pointer left-10 top-6"
-          onClick={() => setisOpen(!isOpen)}
-        >
-          <svg
-            fill="#2563EB"
-            viewBox="0 0 100 80"
-            width="40"
-            height="40"
+    <div className={`flex ${fixed ? "fixed inset-y-0 left-0" : ""}`}>
+      <div
+        className={` ${
+          open ? "w-72" : "w-20 "
+        } bg-black h-screen p-5 pt-8 relative duration-300`}
+      >
+        <img
+          src="./src/assets/control.png"
+          className={`absolute cursor-pointer -right-3 top-9 w-7 
+           border-2 rounded-full  ${!open && "rotate-180"}`}
+          onClick={() => setOpen(!open)}
+        />
+        <div className="flex gap-x-4 items-center">
+          <img
+            src="./src/assets/logo.png"
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[200deg]"
+            }`}
+          />
+          <h1
+            className={`text-white origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
           >
-            <rect width="100" height="10"></rect>
-            <rect y="30" width="100" height="10"></rect>
-            <rect y="60" width="100" height="10"></rect>
-          </svg>
-        </button>
-      ) : (
-        <button className="rounded-lg px-2 hover:bg-green-600 text-xl text-white fixed top-5 left-10 z-10" onClick={() => setisOpen(!isOpen)}>
-          X
-        </button>
-      )}
-      <div className={`top-0 left-0 fixed bg-blue-500 w-[20vw] h-full p-10 transform ${isOpen ? 'translate-x-0' : '-translate-x-[35vw]'} ease-in-out duration-300`}>
-        <div className="p-4">
-          <h2 className="text-2xl text-white mb-4">Classroom Management</h2>
-          <ul>
-            <li className="rounded-full py-2 text-xl text-white text-center hover:bg-sky-400">
-              <Link to="/rooms">Home</Link>
-            </li>
-            <li className="rounded-full py-2 text-xl text-white text-center hover:bg-sky-400">
-              <Link to="/rooms/classrooms">Classrooms</Link>
-            </li>
-            <li className="py-2 text-xl text-white">
-              <div
-                onClick={() => setUnder(!under)}
-                className="cursor-pointer flex items-center"
-              >
-                Branches
-                {under ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
-              </div>
-              <ul className={`pl-4 ${under ? '' : 'hidden'}`}>
-              <div
-                onClick={() => setAnother(!another)}
-                className="cursor-pointer inline-flex items-center whitespace-nowrap my-2"
-              >
-                Computers Science
-                {another ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
-              </div>
-              <ul className={`pl-4 ${another ? '' : 'hidden'}`}>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/classrooms/cse/1">1st year</Link>
-                    </li>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/classrooms/cse/2">2nd year</Link>
-                    </li>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/cse/3">3rd year</Link>
-                    </li>
-                </ul>
-                <div
-                onClick={() => setIse(!ise)}
-                className="cursor-pointer inline-flex items-center whitespace-nowrap my-2"
-              >
-                Information Science
-                {ise ? <FiChevronDown className="ml-2" /> : <FiChevronRight className="ml-2" />}
-              </div>
-              <ul className={`pl-4 ${ise ? '' : 'hidden'}`}>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/classrooms/cse/1">1st year</Link>
-                    </li>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/classrooms/cse/2">2nd year</Link>
-                    </li>
-                    <li className="rounded-full py-2 w-50 text-xl text-white text-center hover:bg-sky-400">
-                      <Link to="/rooms/classrooms/cse/3">3rd year</Link>
-                    </li>
-                </ul>
-              </ul>
-            </li>
-          </ul>
+            User Menu
+          </h1>
         </div>
+        <ul className="pt-6">
+          {Menus.map((Menu, index) => (
+            <li
+              key={index}
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+              ${Menu.gap ? "mt-9" : "mt-2"} ${
+                index === 0 && "bg-light-white"
+              } `}
+            >
+              <Link to={Menu.path}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img src={`./src/assets/${Menu.src}.png`} />
+                  <span
+                    className={`${!open && "hidden"} origin-left duration-200 font-medium text-lg ml-6`}
+                  >
+                    {Menu.title}
+                  </span>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </>
+    </div>
   );
 };
 

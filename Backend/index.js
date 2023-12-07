@@ -13,6 +13,7 @@ const app= express();
 // middleware to parse the json data request body
 app.use(express.json());
 // middleware to cors policy
+// app.use(bodyParser.json());
 app.use(cors());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
@@ -30,7 +31,6 @@ app.get('/',(req,res)=>{
 app.use('/rooms', roomRoute);
 app.use('/schedule',table);
 app.use('/register', signRoute);
-// app.use('/login', loginRoute);
 
 app.post('/login', (req,res)=>{
     const {usn, password}= req.body;

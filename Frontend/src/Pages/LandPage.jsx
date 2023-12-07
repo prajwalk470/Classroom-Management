@@ -44,7 +44,7 @@ const LandPage = () => {
         
       </section>
       <div className='flex flex-row justify-center items-center'>
-      <a href="/rooms" className="mx-10 bg-blue-500 text-white py-2 px-4 rounded-full mt-4 inline-block p-8 hover:bg-blue-700">Get Started</a>
+      <a href="/home" className="mx-10 bg-blue-500 text-white py-2 px-4 rounded-full mt-4 inline-block p-8 hover:bg-blue-700">Get Started</a>
       </div>
       
     </div>

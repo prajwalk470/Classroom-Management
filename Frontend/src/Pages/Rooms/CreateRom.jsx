@@ -8,6 +8,7 @@ const CreateRoom = ()=> {
   const [block, setBlock]= useState('');
   const [floor, setFloor]= useState('');
   const [branch, setBranch]= useState('');
+  const [year_sem, setYear_sem]= useState('');
   const [loading, setLoading]= useState(false);
   const navigate= useNavigate();
 
@@ -16,7 +17,8 @@ const CreateRoom = ()=> {
       roomnumber,
       block,
       floor,
-      branch
+      branch,
+      year_sem
     };
     setLoading(true);
     axios
@@ -69,6 +71,14 @@ const CreateRoom = ()=> {
           className='border-2 border-gray-500 px-4 py-2 w-full'
            />
            </div>
+           <div className='my-4'>
+          <label className='text-xl mr-4 text-grey-500'>Year & Sem</label>
+          <input type="text" 
+          value={year_sem}
+          onChange={(e)=> setYear_sem(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+           />
+        </div>
            <button className='p-2 bg-sky-300 m-8' onClick={handleSaveRoom}>
             Save Room
            </button>

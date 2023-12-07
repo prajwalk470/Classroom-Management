@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BackButton from '../../Components/BackButton';
 import Spinner from '../../Components/Spinner';
 import axios from 'axios';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { useSnackbar } from 'notistack';
 
@@ -11,6 +11,7 @@ const EditRoom = ()=> {
   const [block, setBlock]= useState('');
   const [floor, setFloor]= useState('');
   const [branch, setBranch]= useState('');
+  const [year_sem, setYear_sem]= useState('');
   const [loading, setLoading]= useState(false);
   const navigate= useNavigate();
   const {id} = useParams();
@@ -25,6 +26,7 @@ const EditRoom = ()=> {
         setBlock(response.data.block);
         setFloor(response.data.floor);
         setBranch(response.data.branch);
+        setYear_sem(response.data.year_sem);
         setLoading(false);
       } else {
         // Handle the case where res.data is null or undefined
@@ -46,6 +48,7 @@ const EditRoom = ()=> {
       block,
       floor,
       branch,
+      year_sem
     };
     setLoading(true);
     axios
@@ -98,6 +101,14 @@ const EditRoom = ()=> {
           className='border-2 border-gray-500 px-4 py-2 w-full'
            />
            </div>
+           <div className='my-4'>
+          <label className='text-xl mr-4 text-grey-500'>Year & Sem</label>
+          <input type="text" 
+          value={year_sem}
+          onChange={(e)=> setYear_sem(e.target.value)}
+          className='border-2 border-gray-500 px-4 py-2 w-full'
+           />
+        </div>
            <button className='p-2 bg-sky-300 m-8' onClick={handleEditRoom}>
             Save Room
            </button>

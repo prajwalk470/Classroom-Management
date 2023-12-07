@@ -16,8 +16,11 @@ const roomSchema = new mongoose.Schema({
     branch:{
         type:String,
         required: true
+    },
+    year_sem:{
+        type:String,
+        required:true
     }
-   
   });
   
 //   const Room = mongoose.model('Room', roomSchema);

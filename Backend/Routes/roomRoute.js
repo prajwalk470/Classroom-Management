@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        if (!req.body.roomnumber || !req.body.branch || !req.body.floor || !req.body.block){
+        if (!req.body.roomnumber || !req.body.branch || !req.body.floor || !req.body.block ||!req.body.year_sem){
             return res.status(400).send({
                 message: 'Send all fields',
             });
@@ -15,7 +15,8 @@ router.post('/', async (req, res) => {
             roomnumber: req.body.roomnumber,
             branch: req.body.branch,
             floor: req.body.floor,
-            block:req.body.block
+            block:req.body.block,
+            year_sem: req.body.year_sem
         };
 
         const room = await Room.create(newRoom);
@@ -57,7 +58,7 @@ router.get('/:id', async(req, res)=>{
 });
 router.put('/:id', async(req, res)=>{
     try{
-        if (!req.body.roomnumber || !req.body.block || !req.body.floor || !req.body.branch){
+        if (!req.body.roomnumber || !req.body.block || !req.body.floor || !req.body.branch ||!req.body.year_sem){
             return res.status(400).send({
                 message: 'Send all fields',
             });
