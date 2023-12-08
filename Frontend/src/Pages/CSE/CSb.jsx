@@ -14,46 +14,48 @@ const CSb = () => {
     return days[currentDate.getDay() - 1]; // Adjusted to start from Monday as the first day
   };
   const currentDay = getCurrentDay();
-
+  // const branch = "ece-b";
   useEffect(() => {
-    axios.get('http://localhost:5555/schedule')
+    axios.get(`http://localhost:5555/expr/cse-b`)
       .then((response) => {
-        console.log(response.data.data[1][currentDay]);
-        setTable(response.data.data[1]); // Assuming the response is an object with day-wise data
+        // console.log(response.data.data.timetable);
+        setTable(response.data.data.timetable);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  
+  const currentDayTimetable = resp.find(day => day.dayOfWeek === currentDay);
+  const classesForCurrentDay = currentDayTimetable ? currentDayTimetable.classes : [];
+//   console.log(classesForCurrentDay);
   const schedule = {};
-  
-  for (const day in resp) {
-    if (day !== '_id' && day !== '__v') {
-      schedule[day] = resp[day].map(item => ({
-        id: item.id,
-        name: item.name,
-        startTime: item.startTime,
-        endTime: item.endTime
-      }));
-    }
-  }
-  
 
-  const timetable = schedule[currentDay];
+  // Iterate through the classes of the current day and create a schedule object
+  if (currentDayTimetable) {
+    schedule[currentDayTimetable.dayOfWeek] = classesForCurrentDay.map(item => ({
+      id: item.id,
+      name: item.name,
+      startTime: item.startTime,
+      endTime: item.endTime
+    }));
+  }
+//   console.log(schedule);
+  const timetable = schedule;
   // console.log(timetable);
   const arr = [];
 
   for (const key in timetable) {
     if (timetable.hasOwnProperty(key)) {
       const item = timetable[key];
-      arr.push(item);
+      arr.push(...item); // Use spread operator or concat to flatten the array
     }
   }
-
+  
+//   console.log(arr);
   const updateClassProgress = () => {
     const currentTime = new Date();
     const currentTimeStr = currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    // console.log(currentTimeStr);
     let currentClass = null;
 
     for (const classItem of arr) {
@@ -96,8 +98,7 @@ const CSb = () => {
         return i;
       }
     }
-
-    return -1; // No upcoming classes
+    return -1; 
   };
 
   const getCurrentClassIndex = (currentTime) => {
@@ -105,30 +106,39 @@ const CSb = () => {
 
     for (let i = 0; i < arr.length; i++) {
       if (currentTimeStr >= arr[i].startTime && currentTimeStr <= arr[i].endTime) {
-        return i; // The current class is within this time slot
+        return i; 
       }
     }
-
-    return -1; // No ongoing class right now
+    return -1; 
   };
 
   const allClass = arr;
   // console.log(allClass);
-  const currentTime = new Date(); // Get the current time
+  const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true}); 
 
-const currentClass = currentClassIndex >= 0 && allClass && currentClassIndex < allClass.length
-  ? allClass[currentClassIndex]
-  : null;
+// Determine the current class based on the current class index
+const currentClass =
+  currentClassIndex >= 0 && currentClassIndex < allClass.length
+    ? allClass[currentClassIndex]
+    : null;
 
-const upcomingClasses = currentClassIndex !== null && Array.isArray(allClass)
-  ? allClass.filter(classItem => new Date(classItem.startTime) > currentTime)
-  : [];
+// Filter upcoming classes based on their start times being after the current time
 
-const completedClasses = Array.isArray(allClass)
-  ? allClass.filter(classItem => ( !upcomingClasses.includes(classItem)
-  ))
-  : [];
+// console.log(currentTime);
 
+const upcomingClasses = allClass.filter(classItem => 
+  new Date(classItem.startTime).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true}) > currentTime && classItem!==currentClass);
+// console.log(upcomingClasses);
+// Filter completed classes based on their start times being before the current time
+// and ensuring they are not part of the upcoming classes
+const completedClasses =
+  Array.isArray(allClass)
+    ? allClass.filter(
+        classItem => classItem!== currentClass &&
+        new Date(classItem.startTime).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true}) < currentTime &&
+          !upcomingClasses.includes(classItem)
+      )
+    : [];
 
   return (
     <div className="container mx-auto p-4">
@@ -149,7 +159,7 @@ const completedClasses = Array.isArray(allClass)
         <h2 className="text-xl font-semibold mb-2">Live Class</h2>
         {timeRemaining > 0 ? (
           <div className="bg-blue-500 text-white p-4 rounded-md">
-            <p className="font-semibold">Class Name: {timetable[currentClassIndex].name}</p>
+            <p className="font-semibold">Class Name: {timetable.name}</p>
             <p>Time Remaining: {formatTime(timeRemaining)}</p>
           </div>
         ) : (

@@ -6,6 +6,7 @@ import userData from "./models/signin.js";
 import cors from "cors";
 import roomRoute from './Routes/roomRoute.js'
 import table from './Routes/ttRoute.js'
+import expr from './Routes/ttexrt.js'
 import signRoute from './Routes/signRoute.js';
 
 const app= express();
@@ -30,6 +31,7 @@ app.get('/',(req,res)=>{
 
 app.use('/rooms', roomRoute);
 app.use('/schedule',table);
+app.use('/expr', expr);
 app.use('/register', signRoute);
 
 app.post('/login', (req,res)=>{

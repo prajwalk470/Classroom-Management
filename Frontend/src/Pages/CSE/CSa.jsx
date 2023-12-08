@@ -113,20 +113,66 @@ const CSa = () => {
 
   const allClass = arr;
   // console.log(allClass);
-  const currentTime = new Date(); // Get the current time
+// Determine the current class based on the current class index
+const currentClass =
+  currentClassIndex >= 0 && currentClassIndex < allClass.length
+    ? allClass[currentClassIndex]
+    : null;
 
-const currentClass = currentClassIndex >= 0 && allClass && currentClassIndex < allClass.length
-  ? allClass[currentClassIndex]
-  : null;
+// Filter upcoming classes based on their start times being after the current time
 
-const upcomingClasses = currentClassIndex !== null && Array.isArray(allClass)
-  ? allClass.filter(classItem => new Date(classItem.startTime) > currentTime)
-  : [];
+// console.log(currentTime);
 
-const completedClasses = Array.isArray(allClass)
-  ? allClass.filter(classItem => ( !upcomingClasses.includes(classItem)
-  ))
-  : [];
+// const upcomingClasses = Array.isArray(allClass)
+// ? allClass.filter(classItem => 
+//   new Date(classItem.startTime).toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true}) >currentTime && classItem!==currentClass):[];
+// console.log(upcomingClasses
+// const completedClasses =
+//   Array.isArray(allClass)
+//     ? allClass.filter(
+//         classItem => classItem!== currentClass &&
+//           !(upcomingClasses.includes(classItem))
+//       )
+//     : [];
+// const currentTime = new Date().getTime();
+function convertTimeStringToTimestamp(timeString) {
+  const [time, period] = timeString.split(' ');
+
+  let [hours, minutes] = time.split(':');
+  hours = parseInt(hours, 10);
+
+  if (period === 'PM' && hours !== 12) {
+    hours += 12;
+  } else if (period === 'AM' && hours === 12) {
+    hours = 0;
+  }
+
+  const timestamp = new Date().setHours(hours, minutes, 0, 0);
+  const date = new Date(timestamp);
+  return date.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+}
+const currentTime = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true});
+
+const { upcomingClasses, completedClasses } = (Array.isArray(allClass)
+  ? allClass.reduce(
+      (result, classItem) => {
+        const classStartTime = convertTimeStringToTimestamp(classItem.startTime);
+        const classEndTime = convertTimeStringToTimestamp(classItem.endTime);
+        console.log(classStartTime) ;
+        if (classItem === currentClass || classStartTime > currentTime) {
+          result.upcomingClasses.push(classItem);
+        } else if (classEndTime < currentTime) {
+          result.completedClasses.push(classItem);
+        }
+
+        return result;
+      },
+      { upcomingClasses: [], completedClasses: [] }
+    )
+  : { upcomingClasses: [], completedClasses: [] });
+
+// console.log("Upcoming Classes:", upcomingClasses);
+// console.log("Completed Classes:", completedClasses);
 
   return (
     <div className="container mx-auto p-4">

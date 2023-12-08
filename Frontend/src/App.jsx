@@ -13,6 +13,7 @@ import CSa from './Pages/CSE/CSa';
 import CSb from './Pages/CSE/CSb';
 import CSc from './Pages/CSE/CSc';
 import CSd from './Pages/CSE/CSd';
+import Eceb from './Pages/ECE/ECb';
 import CreateTable from './TimeTable/CreateTable';
 import ShowTable from './TimeTable/ShowTable';
 // import ProtectedRoute from './Auth/AuthProvider'; 
@@ -40,6 +41,7 @@ const App = () => {
     <Route path='tt/CSE/B' element={<CSb />} />
     <Route path='tt/CSE/C' element={<CSc />} />
     <Route path='tt/CSE/D' element={<CSd />} />
+    <Route path='tt/ECE/B' element={<Eceb />} />
     {/* <Route path='rooms/create' element={<CreateRoom />} /> */}
     {/* <Route path='rooms/details/:id' element={<ShowRoom />} />
     <Route path='rooms/delete/:id' element={<DeleteRoom />} />

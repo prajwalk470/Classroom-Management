@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-const CSc = () => {
+const Eceb = () => {
   const [progress, setProgress] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [currentClassIndex, setCurrentClassIndex] = useState(0);
@@ -14,9 +14,9 @@ const CSc = () => {
     return days[currentDate.getDay() - 1]; // Adjusted to start from Monday as the first day
   };
   const currentDay = getCurrentDay();
-  // const branch = "ece-b";
+  const branch = "ece-b";
   useEffect(() => {
-    axios.get(`http://localhost:5555/expr/cse-c`)
+    axios.get(`http://localhost:5555/expr/ece-b`)
       .then((response) => {
         // console.log(response.data.data.timetable);
         setTable(response.data.data.timetable);
@@ -224,4 +224,4 @@ function formatTime(time) {
   return `${minutes} min ${seconds} sec`;
 }
 
-export default CSc;
+export default Eceb;
