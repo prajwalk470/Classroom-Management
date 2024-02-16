@@ -1,10 +1,11 @@
-// components/CreateTable.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
 const CreateTable = () => {
+  const [branch, setBranch] = useState('');
   const [timetableEntries, setTimetableEntries] = useState([
     {
+      branch: '',
       dayOfWeek: 'Monday',
       classes: [{ id: '', name: '', startTime: '', endTime: '' }],
     },
@@ -24,33 +25,56 @@ const CreateTable = () => {
       return newEntries;
     });
   };
-
+  const updateBranch = (value) => {
+    setBranch(value);
+    setTimetableEntries((prevEntries) => {
+      return prevEntries.map((entry, index) => {
+        if (index === 0) {
+          // Update the branch in the first entry
+          return { ...entry, branch: value };
+        }
+        return entry;
+      });
+    });
+  };
   const updateInput = (index, classIndex, field, value) => {
     setTimetableEntries((prevEntries) => {
       const newEntries = [...prevEntries];
+
       if (field === 'dayOfWeek') {
         newEntries[index].dayOfWeek = value;
       } else {
         newEntries[index].classes[classIndex][field] = value;
       }
+
       return newEntries;
     });
   };
 
   const createEntries = async () => {
     try {
-      // Filter out days without classes
-      const nonEmptyEntries = timetableEntries.filter((entry) => entry.classes.length > 0);
+      const entries = timetableEntries.map((entry) => ({
+        dayOfWeek: entry.dayOfWeek,
+        classes: entry.classes,
+      }));
 
-      // Ensure there is at least one day with classes
+      const nonEmptyEntries = entries.filter((entry) => entry.classes.length > 0);
+
       if (nonEmptyEntries.length === 0) {
         console.log('No classes to submit.');
         return;
       }
 
-      // Send the non-empty entries to the server
-      await axios.post('http://localhost:5555/schedule', nonEmptyEntries);
-      console.log(nonEmptyEntries);
+      // Add the branch separately only once
+      const entriesWithBranch = [
+        {
+          branch,
+          timetable: nonEmptyEntries,
+        }
+      ];
+      // console.log(entriesWithBranch);
+      await axios.post('http://localhost:5555/expr', entriesWithBranch[0]);
+      console.log(entriesWithBranch[0]);
       console.log('Timetable entries created successfully!');
     } catch (error) {
       console.log(error);
@@ -60,8 +84,19 @@ const CreateTable = () => {
   return (
     <div className="container mx-auto my-8 p-4 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Create Timetable Entries</h1>
+      <label className="block mb-2 font-semibold">
+            Branch:
+            <input
+              type="text"
+              name="branch"
+              value={branch}
+              onChange={(e) =>  updateBranch(e.target.value)} 
+              className="border px-3 py-2 w-full mt-1"
+            />
+          </label>
       {timetableEntries.map((entry, index) => (
         <div key={index} className="mb-4 p-4 border border-gray-300 rounded">
+          
           <label className="block mb-2 font-semibold">
             Day:
             <input
@@ -124,7 +159,7 @@ const CreateTable = () => {
       <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={addDay}>
         Add Day
       </button>
-      <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={createEntries}>
+      <button className="bg-green-500 text-white px-4 mx-4 py-2 rounded" onClick={createEntries}>
         Create Timetable Entries
       </button>
     </div>
