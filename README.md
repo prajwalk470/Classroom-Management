@@ -1,4 +1,5 @@
 # Classroom-Management
+<<<<<<< HEAD
 
 #This project primarily focuses on current ongoing classes and thereby knowing which classes are occupied and which are not. 
 
@@ -23,3 +24,6 @@
 ![1708100892841](image/README/1708100892841.png)
 
 ** Still project needs many changes and updates to be made..
+=======
+Manages the classes for students and staff involved by showing timetable and more ..
+>>>>>>> bd81b7749608d2d82cbf1901f1669fe95f38e702
