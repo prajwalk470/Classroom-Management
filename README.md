@@ -1,5 +1,4 @@
 # Classroom-Management
-<<<<<<< HEAD
 
 #This project primarily focuses on current ongoing classes and thereby knowing which classes are occupied and which are not. 
 
