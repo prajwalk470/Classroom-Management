@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Sidebar from '../Components/Sdebar'
-import Navbar from '../Land/nav'
+// import React from 'react'
+// import { Link } from 'react-router-dom'
+// import Sidebar from '../Components/Sdebar'
+// import Navbar from '../Land/nav'
 // import tae from '../assets/bg.jpg'
 const FeatureCard = ({ title, description, image }) => {
   return (

@@ -16,8 +16,8 @@ import CSd from './Pages/CSE/CSd';
 import Eceb from './Pages/ECE/ECb';
 import CreateTable from './TimeTable/CreateTable';
 import ShowTable from './TimeTable/ShowTable';
-import Ecec from './Pages/ECE/ECc';
-import Ecea from './Pages/ECE/ECa';
+// import Ecec from './Pages/ECE/ECc';
+// import Ecea from './Pages/ECE/ECa';
 import Eced from './Pages/ECE/ECd';
 // import ProtectedRoute from './Auth/AuthProvider'; 
 const AuthenticatedRoute = ({ element, isAuthenticated }) => {
@@ -44,9 +44,9 @@ const App = () => {
     <Route path='tt/CSE/B' element={<CSb />} />
     <Route path='tt/CSE/C' element={<CSc />} />
     <Route path='tt/CSE/D' element={<CSd />} />
-    <Route path='tt/ECE/A' element={<Ecea />} />
+    {/* <Route path='tt/ECE/A' element={<Ecea />} /> */}
     <Route path='tt/ECE/B' element={<Eceb />} />
-    <Route path='tt/ECE/C' element={<Ecec />} />
+    {/* <Route path='tt/ECE/C' element={<Ecec />} /> */}
     <Route path='tt/ECE/D' element={<Eced />} />
     {/* <Route path='rooms/create' element={<CreateRoom />} /> */}
     {/* <Route path='rooms/details/:id' element={<ShowRoom />} />

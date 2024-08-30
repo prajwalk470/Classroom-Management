@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Spinner from '../../Components/Spinner';
+import  { useState, useEffect } from 'react';
+// import Spinner from '../../Components/Spinner';
 import axios from 'axios';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];

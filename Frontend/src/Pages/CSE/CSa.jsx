@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Spinner from '../../Components/Spinner';
+import  { useState, useEffect } from 'react';
+// import Spinner from '../../Components/Spinner';
 import axios from 'axios';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -45,6 +45,7 @@ const CSa = () => {
   const arr = [];
 
   for (const key in timetable) {
+    // eslint-disable-next-line no-prototype-builtins
     if (timetable.hasOwnProperty(key)) {
       const item = timetable[key];
       arr.push(item);
@@ -87,6 +88,7 @@ const CSa = () => {
   useEffect(() => {
     const progressInterval = setInterval(updateClassProgress, 1000);
     return () => clearInterval(progressInterval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentClassIndex, currentDay]);
 
   const getNextClassIndex = (currentTime) => {
